@@ -1,4 +1,13 @@
 let myLibrary = [];
+/*let bookAuthor = null;
+let bookTitle = null;
+let bookPages = null;
+let bookRead = null;*/
+let books = document.querySelector(".books");
+let book1 = new Book("Harry Potter", "JK Rowling", 264, true);
+let book2 = new Book("Meditations", "Marcus Aurelius", 189, true);
+myLibrary.push(book1);
+myLibrary.push(book2);
 let addBook = document.querySelector("#addBook");
 addBook.addEventListener("click", (e) => {
     displayForm(); //write this function
@@ -33,11 +42,35 @@ function render() {
         displayBook(book); //write this function
     });
 }
+render();
 
 function displayBook(book) {
-
+    let div = document.createElement("div");
+    div.textContent = book.info();
+    books.appendChild(div);
 }
 
 function displayForm() {
-    
+   /* let div = document.createElement("div");
+    let d1 = document.createElement("div");
+    let d2 = document.createElement("div");
+    let d3 = document.createElement("div");
+    let d4 = document.createElement("div");
+    let p1 = document.createElement("p");
+    p1.textContent = "Book: "
+    let p2 = document.createElement("p");
+    p2.textContent = "Author: "
+    let p3 = document.createElement("p");
+    p3.textContent = "Number of pages: "
+    let p4 = document.createElement("p");
+    p4.textContent = "Read?: "
+    let titleInput = document.createElement("input");
+    let authorInput = document.createElement("input");
+    let pagesInput = document.createElement("input");
+    let readInput = document.createElement("input");
+    div.appendChild(d1);
+    div.appendChild(d2);
+    div.appendChild(d3);
+    div.appendChild(d4);
+ */
 }
