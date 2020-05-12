@@ -6,15 +6,24 @@ let bookRead = null;*/
 let form = document.querySelector(".form");
 form.style.display = "none"; //hides the form
 let books = document.querySelector(".books");
-let book1 = new Book("Harry Potter", "JK Rowling", 264, true);
-let book2 = new Book("Meditations", "Marcus Aurelius", 189, true);
+let book1 = new Book("Harry Potter", "JK Rowling", 264, "read");
+let book2 = new Book("Meditations", "Marcus Aurelius", 189, "not read");
 myLibrary.push(book1);
 myLibrary.push(book2);
 let submit = document.querySelector("#submit");
 let cancel = document.querySelector("#cancel");
 submit.addEventListener("click", (e) => {
-    submitData(); //finish this
+    addBookToLibrary(); //finish this
+    render();
 });
+/* function submitData() {
+    let title = document.querySelector('[name="title"]').value;
+    let author = document.querySelector('[name="author"]').value;
+    let pages = document.querySelector('[name="pages"]').value;
+    let read = document.querySelector('[name="read-status"]').value;
+    let book = new Book(title, author, pages, read);
+    myLibrary.push(book);
+} */
 cancel.addEventListener("click", (e) => {
     cancelSubmission(); // finish this
 });
@@ -28,8 +37,9 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.rendered = false;
     this.info = function() {
-        if (read) {
+        if (read == "read") {
             return title + " by " + author + ", " + pages + " pages, read";
         }
         else {
@@ -39,17 +49,20 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary() {
-    let title = titleInput.value;
-    let author = authorInput.value;
-    let pages = pagesInput.value;
-    let read = readInput.value;
+    let title = document.querySelector('[name="title"]').value;
+    let author = document.querySelector('[name="author"]').value;
+    let pages = document.querySelector('[name="pages"]').value;
+    let read = document.querySelector('[name="read-status"]').value;
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
 }
 
 function render() {
     myLibrary.forEach((book) => {
+        if (!book.rendered) {
         displayBook(book); //write this function
+        book.rendered = true;
+        }
     });
 }
 render();
