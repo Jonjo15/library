@@ -4,6 +4,8 @@ let bookTitle = null;
 let bookPages = null;
 let bookRead = null;*/
 let form = document.querySelector(".form");
+let inputs = document.querySelectorAll("input");
+
 form.style.display = "none"; //hides the form
 let books = document.querySelector(".books");
 let book1 = new Book("Harry Potter", "JK Rowling", 264, "read");
@@ -15,7 +17,15 @@ let cancel = document.querySelector("#cancel");
 submit.addEventListener("click", (e) => {
     addBookToLibrary(); //finish this
     render();
+    form.style.display = "none";
+    clearInputs();
 });
+
+function clearInputs() {
+    inputs.forEach((input) => {
+        input.value = "";
+    })
+}
 /* function submitData() {
     let title = document.querySelector('[name="title"]').value;
     let author = document.querySelector('[name="author"]').value;
@@ -52,7 +62,14 @@ function addBookToLibrary() {
     let title = document.querySelector('[name="title"]').value;
     let author = document.querySelector('[name="author"]').value;
     let pages = document.querySelector('[name="pages"]').value;
-    let read = document.querySelector('[name="read-status"]').value;
+    let read;
+    if (document.querySelector("#r1").checked) {
+        read = "read";
+    }
+    else {
+        read = "not read";
+    } 
+    //let read = document.querySelector('input[name="read-status"]:checked').value;
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
 }
