@@ -84,7 +84,7 @@ function render() {
         book.rendered = true;
         }
     });
-    //addButton();
+    addButton();
 }
 render();
 
@@ -101,10 +101,13 @@ function displayForm() {
 function addButton() {
     let divs = document.querySelectorAll(".divs");
     divs.forEach((div) => {
+        if(!div.classList.contains("remove")) {
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "Remove";
-        deleteButton.classList.add(".remove");
+        div.classList.add("remove");
+        deleteButton.classList.add("remove");
         div.appendChild(deleteButton);
+        }
     });
 }
 /*
