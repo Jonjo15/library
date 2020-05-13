@@ -15,6 +15,7 @@ myLibrary.push(book1);
 myLibrary.push(book2);
 let submit = document.querySelector("#submit");
 let cancel = document.querySelector("#cancel");
+
 submit.addEventListener("click", (e) => {
     addBookToLibrary(); //finish this
     render();
@@ -109,6 +110,26 @@ function addButton() {
         div.appendChild(deleteButton);
         }
     });
+}
+
+let remove = document.querySelectorAll(".remove");
+let removeButtons = getRemoveButtons();
+function getRemoveButtons() {
+    let removeButtons = [];
+    for(let i = 0; i < remove.length; i++) {
+        if (i % 2 == 1) {
+            removeButtons.push(remove[i]);
+        }
+    }
+    return removeButtons;
+}
+removeButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        removeBook();
+    })
+});
+function removeBook() {
+    
 }
 /*
 function displayForm() {
