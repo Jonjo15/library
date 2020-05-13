@@ -5,7 +5,8 @@ let bookPages = null;
 let bookRead = null;*/
 let form = document.querySelector(".form");
 let inputs = document.querySelectorAll("input");
-
+/* let deleteButton = document.createElement("button");
+deleteButton.textContent = "Remove"; */
 form.style.display = "none"; //hides the form
 let books = document.querySelector(".books");
 let book1 = new Book("Harry Potter", "JK Rowling", 264, "read");
@@ -18,7 +19,9 @@ submit.addEventListener("click", (e) => {
     addBookToLibrary(); //finish this
     render();
     form.style.display = "none";
+    //addButton();
     clearInputs();
+    
 });
 
 function clearInputs() {
@@ -81,6 +84,7 @@ function render() {
         book.rendered = true;
         }
     });
+    //addButton();
 }
 render();
 
@@ -88,9 +92,20 @@ function displayBook(book) {
     let div = document.createElement("div");
     div.textContent = book.info();
     books.appendChild(div);
+    div.classList.add("divs");
 }
 function displayForm() {
     form.style.display = "flex";
+}
+
+function addButton() {
+    let divs = document.querySelectorAll(".divs");
+    divs.forEach((div) => {
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "Remove";
+        deleteButton.classList.add(".remove");
+        div.appendChild(deleteButton);
+    });
 }
 /*
 function displayForm() {
