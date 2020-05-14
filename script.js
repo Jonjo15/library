@@ -21,7 +21,6 @@ let cancel = document.querySelector("#cancel");
 submit.addEventListener("click", (e) => {
     addBookToLibrary(); //finish this
     render();
-    addDataKeys();
     form.style.display = "none";
     //addButton();
     clearInputs();
@@ -97,6 +96,7 @@ render();
 function displayBook(book) {
     let div = document.createElement("div");
     div.textContent = book.info();
+    div.setAttribute("data-id", book.index);
     books.appendChild(div);
     div.classList.add("divs");
 }
@@ -106,10 +106,11 @@ function displayForm() {
 
 function addButton() {
     let divs = document.querySelectorAll(".divs");
-    divs.forEach((div) => {
+    divs.forEach((div, i) => {
         if(!div.classList.contains("remove")) {
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "Remove";
+        deleteButton.setAttribute("data-id", i);
         div.classList.add("remove");
         deleteButton.classList.add("remove");
         div.appendChild(deleteButton);
@@ -130,14 +131,14 @@ function getRemoveButtons() {
 }
 removeButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
-        removeBook();
+        removeBook(e.target);
     })
 });
 function removeBook() {
     
 }
 
-function addDataKeys() {
+/* function addDataKeys() {
     let removes = document.querySelectorAll(".remove");
     let i = 0;
     let j = 0;
@@ -155,7 +156,7 @@ function addDataKeys() {
         }
     });
 }
-addDataKeys();
+addDataKeys(); */
 /*
 function displayForm() {
     let div = document.createElement("div");
