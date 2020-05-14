@@ -12,17 +12,20 @@ let books = document.querySelector(".books");
 let book1 = new Book("Harry Potter", "JK Rowling", 264, "read");
 let book2 = new Book("Meditations", "Marcus Aurelius", 189, "not read");
 myLibrary.push(book1);
+book1.index = myLibrary.length -1;
 myLibrary.push(book2);
+book2.index = myLibrary.length -1;
 let submit = document.querySelector("#submit");
 let cancel = document.querySelector("#cancel");
 
 submit.addEventListener("click", (e) => {
     addBookToLibrary(); //finish this
     render();
+    addDataKeys();
     form.style.display = "none";
     //addButton();
     clearInputs();
-    
+    //addDataKeys();
 });
 
 function clearInputs() {
@@ -52,6 +55,7 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.rendered = false;
+    this.index;
     this.info = function() {
         if (read == "read") {
             return title + " by " + author + ", " + pages + " pages, read";
@@ -76,6 +80,7 @@ function addBookToLibrary() {
     //let read = document.querySelector('input[name="read-status"]:checked').value;
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
+    book.index = myLibrary.length -1;
 }
 
 function render() {
@@ -131,6 +136,26 @@ removeButtons.forEach((button) => {
 function removeBook() {
     
 }
+
+function addDataKeys() {
+    let removes = document.querySelectorAll(".remove");
+    let i = 0;
+    let j = 0;
+    removes.forEach((element) => {
+        if (i < 2) {
+            element.setAttribute("data-id", j);
+            //element.dataset.key = j;
+            i += 1;
+        }
+        else {
+            i = 0;
+            j += 1;
+            element.setAttribute("data-id", j);
+            //element.dataset.key = j;
+        }
+    });
+}
+addDataKeys();
 /*
 function displayForm() {
     let div = document.createElement("div");
