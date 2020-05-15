@@ -117,7 +117,9 @@ function addButton() {
         deleteButton.addEventListener("click", (e) => {
             //test = +e.target.dataset.id;
              console.log(+e.target.dataset.id)
-             removeBook(+e.target.dataset.id)
+             console.log(e.target.parentNode);
+             //console.log(e.target.parrentNode)
+             removeBook(+e.target.dataset.id, e.target.parentNode)
         });
         div.appendChild(deleteButton);
         }
@@ -137,11 +139,39 @@ function getRemoveButtons() {
 }
 
 
-function removeBook(idx) {
+function removeBook(idx, div) {
     //let removeTarget = myLibrary[idx];
     myLibrary.splice(idx, 1);
-    render();
+    div.remove();
+    recalibrateIndices();
+    resetDataAttributes();
     console.log(myLibrary);
+}
+
+function recalibrateIndices() {
+    myLibrary.forEach((book, idx) => {
+        book.index = idx;
+    });
+}
+
+function resetDataAttributes() {
+    elements = document.querySelectorAll(".remove");
+    buttons = [];
+    divs = [];
+    elements.forEach((ele, i) => {
+         if(i % 2 == 0) {
+             divs.push(ele);
+         }
+         else {
+            buttons.push(ele);
+         }
+    });
+    buttons.forEach((button, i) => {
+        button.setAttribute("data-id", i);
+    });
+    divs.forEach((div, i) => {
+        div.setAttribute("data-id", i);
+    });
 }
 
 /* function addDataKeys() {
