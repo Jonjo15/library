@@ -103,7 +103,7 @@ function displayBook(book) {
 function displayForm() {
     form.style.display = "flex";
 }
-
+//let test;
 function addButton() {
     let divs = document.querySelectorAll(".divs");
     divs.forEach((div, i) => {
@@ -113,6 +113,12 @@ function addButton() {
         deleteButton.setAttribute("data-id", i);
         div.classList.add("remove");
         deleteButton.classList.add("remove");
+        
+        deleteButton.addEventListener("click", (e) => {
+            //test = +e.target.dataset.id;
+             console.log(+e.target.dataset.id)
+             removeBook(+e.target.dataset.id)
+        });
         div.appendChild(deleteButton);
         }
     });
@@ -129,13 +135,13 @@ function getRemoveButtons() {
     }
     return removeButtons;
 }
-removeButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-        removeBook(e.target);
-    })
-});
-function removeBook() {
-    
+
+
+function removeBook(idx) {
+    //let removeTarget = myLibrary[idx];
+    myLibrary.splice(idx, 1);
+    render();
+    console.log(myLibrary);
 }
 
 /* function addDataKeys() {
