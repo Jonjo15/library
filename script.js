@@ -18,6 +18,10 @@ book2.index = myLibrary.length -1;
 let submit = document.querySelector("#submit");
 let cancel = document.querySelector("#cancel");
 
+cancel.addEventListener("click", (e) => {
+    form.style.display = "none";
+    clearInputs();
+});
 submit.addEventListener("click", (e) => {
     addBookToLibrary(); //finish this
     render();
@@ -56,12 +60,13 @@ function Book(title, author, pages, read) {
     this.rendered = false;
     this.index;
     this.info = function() {
-        if (this.read == "read") {
+        return title + " by " + author + ", " + pages + " pages";
+      /*   if (this.read == "read") {
             return title + " by " + author + ", " + pages + " pages, read";
         }
         else {
             return title + " by " + author + ", " + pages + " pages, not read yet";
-        }
+        } */
     }
 }
 
@@ -126,9 +131,10 @@ function addButton() {
              removeBook(+e.target.dataset.id, e.target.parentNode)
         });
         toggleRead.addEventListener("click", (e) => {
-            console.log(e.target.dataset.id);
+            /* console.log(e.target.dataset.id);
             console.log(e.target.parentNode);
-            toggle(+e.target.dataset.id, e.target.parentNode);
+            console.log(e.target.textContent); */
+            toggle(+e.target.dataset.id, e.target.parentNode, e.target);
         });
         div.appendChild(toggleRead);
         div.appendChild(deleteButton);
@@ -136,12 +142,14 @@ function addButton() {
     });
 }
 
-function toggle(idx, div) {
+function toggle(idx, div, button) {
     if (myLibrary[idx].read == "read") {
         myLibrary[idx].read = "not read";
+        button.textContent = "not read";
     }
     else {
         myLibrary[idx].read = "read";
+        button.textContent = "read";
     }
     div.firstChild.data = myLibrary[idx].info();
     //displayBook(myLibrary[idx]);
