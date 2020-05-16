@@ -56,7 +56,7 @@ function Book(title, author, pages, read) {
     this.rendered = false;
     this.index;
     this.info = function() {
-        if (read == "read") {
+        if (this.read == "read") {
             return title + " by " + author + ", " + pages + " pages, read";
         }
         else {
@@ -69,13 +69,13 @@ function addBookToLibrary() {
     let title = document.querySelector('[name="title"]').value;
     let author = document.querySelector('[name="author"]').value;
     let pages = document.querySelector('[name="pages"]').value;
-    let read;
-    if (document.querySelector("#r1").checked) {
+    let read = "read";
+    /* if (document.querySelector("#r1").checked) {
         read = "read";
     }
     else {
         read = "not read";
-    } 
+    }  */
     //let read = document.querySelector('input[name="read-status"]:checked').value;
     let book = new Book(title, author, pages, read);
     myLibrary.push(book);
@@ -111,6 +111,10 @@ function addButton() {
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "Remove";
         deleteButton.setAttribute("data-id", i);
+        let toggleRead = document.createElement("button");
+        toggleRead.setAttribute("data-id", i);
+        toggleRead.textContent = myLibrary[i].read;
+        toggleRead.classList.add("toggle");
         div.classList.add("remove");
         deleteButton.classList.add("remove");
         
@@ -121,9 +125,26 @@ function addButton() {
              //console.log(e.target.parrentNode)
              removeBook(+e.target.dataset.id, e.target.parentNode)
         });
+        toggleRead.addEventListener("click", (e) => {
+            console.log(e.target.dataset.id);
+            console.log(e.target.parentNode);
+            toggle(+e.target.dataset.id, e.target.parentNode);
+        });
+        div.appendChild(toggleRead);
         div.appendChild(deleteButton);
         }
     });
+}
+
+function toggle(idx, div) {
+    if (myLibrary[idx].read == "read") {
+        myLibrary[idx].read = "not read";
+    }
+    else {
+        myLibrary[idx].read = "read";
+    }
+    div.firstChild.data = myLibrary[idx].info();
+    //displayBook(myLibrary[idx]);
 }
 
 let remove = document.querySelectorAll(".remove");
@@ -156,6 +177,7 @@ function recalibrateIndices() {
 
 function resetDataAttributes() {
     elements = document.querySelectorAll(".remove");
+    let toggles = document.querySelectorAll(".toggle");
     buttons = [];
     divs = [];
     elements.forEach((ele, i) => {
@@ -171,6 +193,9 @@ function resetDataAttributes() {
     });
     divs.forEach((div, i) => {
         div.setAttribute("data-id", i);
+    });
+    toggles.forEach((button, i) => {
+        button.setAttribute("data-id", i);
     });
 }
 
