@@ -106,7 +106,7 @@ function displayBook(book) {
     div.classList.add("divs");
 }
 function displayForm() {
-    form.style.display = "flex";
+    form.style.display = "grid";
 }
 //let test;
 function addButton() {

@@ -3,9 +3,41 @@ body {
     display: grid;
     justify-content: center;
     height: 660px;
-    grid-template-rows:10% 40% 40%;
+    grid-template-rows: 20% auto auto auto;
+    background-color: rgb(129, 116, 118);
     
 }
-h1 {
+.newbook {
+    display: grid;
+    align-items: stretch;
+    align-self: stretch;
+    justify-items: stretch;
+    justify-self: stretch;
+}
+h1, h2, strong {
     text-align: center;
+    color: rgb(220, 228, 220);
+}
+#addBook {
+    margin-left: 190px;
+    margin-right: auto;
+}
+input {
+    margin: 10px 10px;
+}
+button {
+    margin: 3px 10px;
+}
+.divs {
+    background-color: rgb(145, 173, 173);
+    border: 0.5px solid burlywood;
+    margin: 5px 5px;
+}
+.form {
+    border: 0.5px solid burlywood;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    text-decoration: rgb(220, 228, 220);
+    background-color:  #af6e57;
 }
